@@ -17,19 +17,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-
 import com.erish.wingbrowser.R;
-
 import java.net.URISyntaxException;
-
 import io.github.mthli.Ninja.Browser.AlbumController;
 import io.github.mthli.Ninja.Browser.BrowserController;
 import io.github.mthli.Ninja.Browser.NinjaClickHandler;
 import io.github.mthli.Ninja.Browser.NinjaGestureListener;
 import io.github.mthli.Ninja.Browser.NinjaWebChromeClient;
 import io.github.mthli.Ninja.Browser.NinjaWebViewClient;
-import io.github.mthli.Ninja.Database.Record;
-import io.github.mthli.Ninja.Database.RecordAction;
 import io.github.mthli.Ninja.Unit.BrowserUnit;
 import io.github.mthli.Ninja.Unit.IntentUnit;
 import io.github.mthli.Ninja.Unit.ViewUnit;
@@ -332,21 +327,12 @@ public class NinjaWebView extends WebView implements AlbumController {
                     setAlbumCover(ViewUnit.capture(NinjaWebView.this, dimen144dp, dimen108dp, false, Bitmap.Config.RGB_565));
                 }
             }, animTime);
-
-            if (prepareRecord()) {
-                RecordAction action = new RecordAction(context);
-                action.open(true);
-                action.addHistory(new Record(getTitle(), getUrl(), System.currentTimeMillis()));
-                action.close();
-                browserController.updateAutoComplete();
-            }
         }
     }
 
     public synchronized void update(String title, String url) {
         album.setAlbumTitle(title);
         if (foreground) {
-            browserController.updateBookmarks();
             browserController.updateInputBox(url);
         }
     }

@@ -22,8 +22,6 @@ import java.net.URLEncoder;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-import io.github.mthli.Ninja.Database.RecordAction;
-
 public class BrowserUnit {
     public static final int PROGRESS_MAX = 100;
     public static final int PROGRESS_MIN = 0;
@@ -211,11 +209,6 @@ public class BrowserUnit {
     }
 
     public static void clearHistory(Context context) {
-        RecordAction action = new RecordAction(context);
-        action.open(true);
-        action.clearHistory();
-        action.close();
-
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
             WebIconDatabase.getInstance().removeAllIcons();
         }

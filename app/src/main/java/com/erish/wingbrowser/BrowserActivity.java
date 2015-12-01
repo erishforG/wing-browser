@@ -33,7 +33,6 @@ import android.webkit.CookieManager;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -45,20 +44,19 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
+
 import org.askerov.dynamicgrid.DynamicGridView;
+
 import java.util.List;
+
 import io.github.mthli.Ninja.Browser.AlbumController;
 import io.github.mthli.Ninja.Browser.BrowserContainer;
 import io.github.mthli.Ninja.Browser.BrowserController;
-import io.github.mthli.Ninja.Database.Record;
-import io.github.mthli.Ninja.Database.RecordAction;
 import io.github.mthli.Ninja.Service.ClearService;
 import io.github.mthli.Ninja.Unit.BrowserUnit;
 import io.github.mthli.Ninja.Unit.IntentUnit;
 import io.github.mthli.Ninja.Unit.ViewUnit;
 import io.github.mthli.Ninja.View.FullscreenHolder;
-import io.github.mthli.Ninja.View.GridAdapter;
-import io.github.mthli.Ninja.View.GridItem;
 import io.github.mthli.Ninja.View.NinjaRelativeLayout;
 import io.github.mthli.Ninja.View.NinjaToast;
 import io.github.mthli.Ninja.View.NinjaWebView;
@@ -183,10 +181,6 @@ public class BrowserActivity extends Activity implements BrowserController {
         inputBox = (TextView) findViewById(R.id.main_omnibox_input);
         omniboxOverflow = (ImageView) findViewById(R.id.main_omnibox_overflow);
         progressBar = (ProgressBar) findViewById(R.id.main_progress_bar);
-
-        updateBookmarks();
-        updateAutoComplete();
-
         omniboxOverflow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,23 +194,9 @@ public class BrowserActivity extends Activity implements BrowserController {
             updateProgress(BrowserUnit.PROGRESS_MIN);
         }
 
-        RecordAction action = new RecordAction(this);
-        action.open(false);
-        final List<GridItem> gridList = action.listGrid();
-        action.close();
-
         DynamicGridView gridView = (DynamicGridView) layout.findViewById(R.id.home_grid);
         TextView aboutBlank = (TextView) layout.findViewById(R.id.home_about_blank);
         gridView.setEmptyView(aboutBlank);
-
-        final GridAdapter gridAdapter;
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            gridAdapter = new GridAdapter(this, gridList, 3);
-        } else {
-            gridAdapter = new GridAdapter(this, gridList, 2);
-        }
-        gridView.setAdapter(gridAdapter);
-        gridAdapter.notifyDataSetChanged();
 
         /* Wait for gridAdapter.notifyDataSetChanged() */
         if (update) {
@@ -228,13 +208,6 @@ public class BrowserActivity extends Activity implements BrowserController {
                 }
             }, shortAnimTime);
         }
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                updateAlbum(gridList.get(position).getURL());
-            }
-        });
     }
 
     private void initSearchPanel() {
@@ -586,20 +559,6 @@ public class BrowserActivity extends Activity implements BrowserController {
     }
 
     @Override
-    public void updateAutoComplete() {
-        RecordAction action = new RecordAction(this);
-        action.open(false);
-        List<Record> list = action.listBookmarks();
-        list.addAll(action.listHistory());
-        action.close();
-    }
-
-    @Override
-    public void updateBookmarks() {
-
-    }
-
-    @Override
     public void updateInputBox(String query) {
         AlbumController controller = nextAlbumController(false);
 
@@ -618,12 +577,10 @@ public class BrowserActivity extends Activity implements BrowserController {
 
         if (currentAlbumController instanceof NinjaRelativeLayout) {
             updateProgress(BrowserUnit.PROGRESS_MAX);
-            updateBookmarks();
             updateInputBox(null);
         } else if (currentAlbumController instanceof NinjaWebView) {
             NinjaWebView ninjaWebView = (NinjaWebView) currentAlbumController;
             updateProgress(ninjaWebView.getProgress());
-            updateBookmarks();
             if (ninjaWebView.getUrl() == null && ninjaWebView.getOriginalUrl() == null) {
                 updateInputBox(null);
             } else if (ninjaWebView.getUrl() != null) {
@@ -648,7 +605,6 @@ public class BrowserActivity extends Activity implements BrowserController {
             animator.start();
         }
 
-        updateBookmarks();
         if (progress < BrowserUnit.PROGRESS_MAX) {
             progressBar.setVisibility(View.VISIBLE);
         } else {

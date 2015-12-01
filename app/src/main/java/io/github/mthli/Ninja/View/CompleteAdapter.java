@@ -12,14 +12,10 @@ import android.widget.TextView;
 
 import com.erish.wingbrowser.R;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import io.github.mthli.Ninja.Database.Record;
 import io.github.mthli.Ninja.Unit.BrowserUnit;
 
 public class CompleteAdapter extends BaseAdapter implements Filterable {
@@ -122,29 +118,6 @@ public class CompleteAdapter extends BaseAdapter implements Filterable {
     private List<CompleteItem> originalList;
     private List<CompleteItem> resultList;
     private CompleteFilter filter = new CompleteFilter();
-
-    public CompleteAdapter(Context context, int layoutResId, List<Record> recordList) {
-        this.context = context;
-        this.layoutResId = layoutResId;
-        this.originalList = new ArrayList<>();
-        this.resultList = new ArrayList<>();
-        dedup(recordList);
-    }
-
-    private void dedup(List<Record> recordList) {
-        for (Record record : recordList) {
-            if (record.getTitle() != null
-                    && !record.getTitle().isEmpty()
-                    && record.getURL() != null
-                    && !record.getURL().isEmpty()) {
-                originalList.add(new CompleteItem(record.getTitle(), record.getURL()));
-            }
-        }
-
-        Set<CompleteItem> set = new HashSet<>(originalList);
-        originalList.clear();
-        originalList.addAll(set);
-    }
 
     @Override
     public int getCount() {

@@ -33,14 +33,6 @@ public class NinjaWebViewClient extends WebViewClient {
     private NinjaWebView ninjaWebView;
     private Context context;
 
-    private String BANK_TID = "";
-
-    final int RESCODE = 1;
-    final String ISP_LINK =  "market://details?id=kvp.jjy.MispAndroid320";				// ISP 설치 링크
-    final String NICE_URL = "https://web.nicepay.co.kr/smart/interfaceURL.jsp";			// NICEPAY SMART 요청 URL
-    final String NICE_BANK_URL = "https://web.nicepay.co.kr/smart/bank/payTrans.jsp";	// 계좌이체 거래 요청 URL
-    final String KFTC_LINK = "market://details?id=com.kftc.bankpay.android";			//	금융결제원 설치 링크
-
     public NinjaWebViewClient(NinjaWebView ninjaWebView) {
         super();
         this.ninjaWebView = ninjaWebView;
@@ -154,31 +146,6 @@ public class NinjaWebViewClient extends WebViewClient {
 
         return false;
     }
-
-//    @Deprecated
-//    @Override
-//    public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
-////            return new WebResourceResponse(
-////                    BrowserUnit.MIME_TYPE_TEXT_PLAIN,
-////                    BrowserUnit.URL_ENCODING,
-////                    new ByteArrayInputStream("".getBytes())
-////            );
-//
-//        return super.shouldInterceptRequest(view, url);
-//    }
-
-//    @Override
-//    public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-////                return new WebResourceResponse(
-////                        BrowserUnit.MIME_TYPE_TEXT_PLAIN,
-////                        BrowserUnit.URL_ENCODING,
-////                        new ByteArrayInputStream("".getBytes())
-////                );
-//        }
-//
-//        return super.shouldInterceptRequest(view, request);
-//    }
 
     @Override
     public void onFormResubmission(WebView view, @NonNull final Message dontResend, final Message resend) {
