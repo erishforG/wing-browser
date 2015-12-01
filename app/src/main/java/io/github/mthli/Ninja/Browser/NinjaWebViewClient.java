@@ -10,7 +10,6 @@ import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.net.http.SslError;
-import android.os.Build;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.text.method.PasswordTransformationMethod;
@@ -18,8 +17,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.webkit.HttpAuthHandler;
 import android.webkit.SslErrorHandler;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
@@ -27,43 +24,19 @@ import android.widget.LinearLayout;
 
 import com.erish.wingbrowser.R;
 
-import java.io.ByteArrayInputStream;
 import java.net.URISyntaxException;
 
-import io.github.mthli.Ninja.Unit.BrowserUnit;
 import io.github.mthli.Ninja.Unit.IntentUnit;
 import io.github.mthli.Ninja.View.NinjaWebView;
 
 public class NinjaWebViewClient extends WebViewClient {
     private NinjaWebView ninjaWebView;
     private Context context;
-    private AdBlock adBlock;
-
-    private String BANK_TID = "";
-
-    final int RESCODE = 1;
-    final String ISP_LINK =  "market://details?id=kvp.jjy.MispAndroid320";				// ISP 설치 링크
-    final String NICE_URL = "https://web.nicepay.co.kr/smart/interfaceURL.jsp";			// NICEPAY SMART 요청 URL
-    final String NICE_BANK_URL = "https://web.nicepay.co.kr/smart/bank/payTrans.jsp";	// 계좌이체 거래 요청 URL
-    final String KFTC_LINK = "market://details?id=com.kftc.bankpay.android";			//	금융결제원 설치 링크
-
-    private boolean white;
-    public void updateWhite(boolean white) {
-        this.white = white;
-    }
-
-    private boolean enable;
-    public void enableAdBlock(boolean enable) {
-        this.enable = enable;
-    }
 
     public NinjaWebViewClient(NinjaWebView ninjaWebView) {
         super();
         this.ninjaWebView = ninjaWebView;
         this.context = ninjaWebView.getContext();
-        this.adBlock = ninjaWebView.getAdBlock();
-        this.white = false;
-        this.enable = true;
     }
 
     @Override
@@ -172,35 +145,6 @@ public class NinjaWebViewClient extends WebViewClient {
         }
 
         return false;
-    }
-
-    @Deprecated
-    @Override
-    public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
-        if (enable && !white && adBlock.isAd(url)) {
-            return new WebResourceResponse(
-                    BrowserUnit.MIME_TYPE_TEXT_PLAIN,
-                    BrowserUnit.URL_ENCODING,
-                    new ByteArrayInputStream("".getBytes())
-            );
-        }
-
-        return super.shouldInterceptRequest(view, url);
-    }
-
-    @Override
-    public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (enable && !white && adBlock.isAd(request.getUrl().toString())) {
-                return new WebResourceResponse(
-                        BrowserUnit.MIME_TYPE_TEXT_PLAIN,
-                        BrowserUnit.URL_ENCODING,
-                        new ByteArrayInputStream("".getBytes())
-                );
-            }
-        }
-
-        return super.shouldInterceptRequest(view, request);
     }
 
     @Override

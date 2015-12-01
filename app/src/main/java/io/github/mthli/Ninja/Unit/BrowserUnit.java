@@ -22,8 +22,6 @@ import java.net.URLEncoder;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-import io.github.mthli.Ninja.Database.RecordAction;
-
 public class BrowserUnit {
     public static final int PROGRESS_MAX = 100;
     public static final int PROGRESS_MIN = 0;
@@ -154,17 +152,6 @@ public class BrowserUnit {
             return null;
         }
 
-//        String green500 = "<font color='#4CAF50'>{content}</font>";
-//        String gray500 = "<font color='#9E9E9E'>{content}</font>";
-//
-//        if (url.startsWith(BrowserUnit.URL_SCHEME_HTTPS)) {
-//            String scheme = green500.replace("{content}", BrowserUnit.URL_SCHEME_HTTPS);
-//            url = scheme + url.substring(8);
-//        } else if (url.startsWith(BrowserUnit.URL_SCHEME_HTTP)) {
-//            String scheme = gray500.replace("{content}", BrowserUnit.URL_SCHEME_HTTP);
-//            url = scheme + url.substring(7);
-//        }
-
         return url;
     }
 
@@ -211,11 +198,6 @@ public class BrowserUnit {
     }
 
     public static void clearHistory(Context context) {
-        RecordAction action = new RecordAction(context);
-        action.open(true);
-        action.clearHistory();
-        action.close();
-
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
             WebIconDatabase.getInstance().removeAllIcons();
         }
