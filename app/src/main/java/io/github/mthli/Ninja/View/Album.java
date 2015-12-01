@@ -72,8 +72,4 @@ public class Album {
         albumTitle = (TextView) albumView.findViewById(R.id.album_title);
         albumTitle.setText(context.getString(R.string.album_untitled));
     }
-
-    public void deactivate() {
-        albumView.setBackgroundResource(R.drawable.album_shape_dark);
-    }
 }

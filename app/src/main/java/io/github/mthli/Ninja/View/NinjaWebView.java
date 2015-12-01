@@ -294,14 +294,12 @@ public class NinjaWebView extends WebView implements AlbumController {
     public synchronized void activate() {
         requestFocus();
         foreground = true;
-//        album.activate();
     }
 
     @Override
     public synchronized void deactivate() {
         clearFocus();
         foreground = false;
-        album.deactivate();
     }
 
     public synchronized void update(int progress) {
