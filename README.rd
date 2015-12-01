@@ -22,3 +22,11 @@
       가능하도록 만들었다는 것입니다.
       추후에도 계속 여러 결제가 가능하도록 만드는 것이 목적이며,
       혹시 문제점이나 개선사항이 있으시다면 언제든지 push해주세요! 
+      
+## Derivatives:
+
+ - [Ninja Browser](https://github.com/mthli/Ninja "Ninja Browser")
+
+## License:
+
+_[Apache License, Version 2.0](https://github.com/mthli/Ninja/blob/master/LICENSE "Apache License, Version 2.0")_
