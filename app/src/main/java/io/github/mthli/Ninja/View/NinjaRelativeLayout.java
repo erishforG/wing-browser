@@ -75,7 +75,7 @@ public class NinjaRelativeLayout extends RelativeLayout implements AlbumControll
 
     @Override
     public void activate() {
-        album.activate();
+//        album.activate();
     }
 
     @Override
