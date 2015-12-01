@@ -22,7 +22,6 @@ import com.erish.wingbrowser.R;
 
 import java.net.URISyntaxException;
 
-import io.github.mthli.Ninja.Browser.AdBlock;
 import io.github.mthli.Ninja.Browser.AlbumController;
 import io.github.mthli.Ninja.Browser.BrowserController;
 import io.github.mthli.Ninja.Browser.NinjaClickHandler;
@@ -55,11 +54,6 @@ public class NinjaWebView extends WebView implements AlbumController {
     private NinjaClickHandler clickHandler;
     private GestureDetector gestureDetector;
 
-    private AdBlock adBlock;
-    public AdBlock getAdBlock() {
-        return adBlock;
-    }
-
     private boolean foreground;
     public boolean isForeground() {
         return foreground;
@@ -88,7 +82,6 @@ public class NinjaWebView extends WebView implements AlbumController {
         this.animTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
         this.foreground = false;
 
-        this.adBlock = new AdBlock(this.context);
         this.album = new Album(this.context, this, this.browserController);
         this.webViewClient = new NinjaWebViewClient(this);
         this.webChromeClient = new NinjaWebChromeClient(this);
@@ -196,8 +189,6 @@ public class NinjaWebView extends WebView implements AlbumController {
 
         int mode = Integer.valueOf(sp.getString(context.getString(R.string.sp_rendering), "0"));
         initRendering(mode);
-
-        webViewClient.enableAdBlock(sp.getBoolean(context.getString(R.string.sp_ad_block), true));
     }
 
     private synchronized void initAlbum() {
@@ -271,17 +262,7 @@ public class NinjaWebView extends WebView implements AlbumController {
             return;
         }
 
-        webViewClient.updateWhite(adBlock.isWhite(url));
         super.loadUrl(url);
-        if (browserController != null && foreground) {
-            browserController.updateBookmarks();
-        }
-    }
-
-    @Override
-    public void reload() {
-        webViewClient.updateWhite(adBlock.isWhite(getUrl()));
-        super.reload();
     }
 
     @Override
