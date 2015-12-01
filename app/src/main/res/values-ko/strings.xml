@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_open">새 창 열기</string>
+    <string name="action_refresh">새로 고침</string>
+    <string name="action_exit">브라우저 닫기</string>
+
+    <!-- NINJA BROSWER -->
+    <!-- AndroidAgo -->
+    <string name="android_ago_just_now">
+        지금
+    </string>
+
+    <!-- Album -->
+    <string name="album_title_bookmarks">
+        북마크
+    </string>
+    <string name="album_title_history">
+        방문 기록
+    </string>
+    <string name="album_title_home">
+        홈
+    </string>
+    <string name="album_untitled">
+        Untitled
+    </string>
+
+    <!-- Dialog -->
+    <string name="dialog_se_hint">
+        https://www.google.com/search?q=
+    </string>
+    <string name="dialog_ua_hint">
+        Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36
+    </string>
+    <string name="dialog_sign_in_username">
+        Username
+    </string>
+    <string name="dialog_sign_in_password">
+        Password
+    </string>
+    <string name="dialog_button_positive">
+        확인
+    </string>
+    <string name="dialog_button_negative">
+        취소하기
+    </string>
+    <string name="dialog_button_custom">
+        커스텀
+    </string>
+    <string name="dialog_title_download">
+        파일을 다운로드 받으시겠습니까?
+    </string>
+    <string name="dialog_title_resubmission">
+        제출하기
+    </string>
+    <string name="dialog_title_warning">
+        경고
+    </string>
+    <string name="dialog_title_sign_in">
+        Sign in
+    </string>
+    <string name="dialog_content_resubmission">
+        다시 정보를 제출하시겠습니까?
+    </string>
+    <string name="dialog_content_ssl_error">
+        신뢰할 수 없는 사이트입니다 진행하시겠습니까?
+    </string>
+
+    <!-- List -->
+    <string name="list_empty">
+        현재 리스트가 비어있습니다
+    </string>
+
+    <!-- Main -->
+    <string name="main_menu_new_tab">
+        새로운 탭
+    </string>
+    <string name="main_menu_copy_link">
+        링크 복사하기
+    </string>
+    <string name="main_menu_save">
+        저장하기
+    </string>
+    <string name="main_omnibox_input_hint">
+        Search or type URL
+    </string>
+    <string name="main_relayout_ok">
+        확인
+    </string>
+    <string name="main_about_blank">
+        about:blank
+    </string>
+
+    <!-- Notification -->
+    <string name="notification_content_holder">
+        클릭하여 페이지 보기
+    </string>
+
+    <!-- Search -->
+    <string name="search_hint">
+        검색하기
+    </string>
+
+    <!-- Settings -->
+    <string name="setting_label">
+        설정
+    </string>
+    <!-- Browser setting -->
+    <string name="setting_title_browser">
+        브라우저 설정
+    </string>
+    <!-- Search engine -->
+    <string name="setting_title_search_engine">
+        검색 엔진
+    </string>
+    <string name="setting_summary_search_engine_google">
+        Google
+    </string>
+    <string name="setting_summary_search_engine_duckduckgo">
+        DuckDuckGo
+    </string>
+    <string name="setting_summary_search_engine_startpage">
+        시작페이지
+    </string>
+    <string name="setting_summary_search_engine_bing">
+        Bing
+    </string>
+    <string name="setting_summary_search_engine_baidu">
+        Baidu
+    </string>
+    <string name="setting_summary_search_engine_custom">
+        커스텀
+    </string>
+    <!-- Volume key scroll -->
+    <string name="whilelist_filename">
+        화이트리스트
+    </string>
+    <!-- Bookmarks -->
+    <string name="bookmarks_filename">
+        북마크
+    </string>
+
+    <!-- Toast -->
+    <string name="toast_copy_successful">
+        성공적으로 복사되었습니다
+    </string>
+    <string name="toast_delete_successful">
+        성공적으로 삭제되었습니다
+    </string>
+    <string name="toast_input_empty">
+        입력해주세요
+    </string>
+    <string name="toast_invalid_domain">
+        허용되지 않는 도메인
+    </string>
+    <string name="toast_load_error">
+        URL을 불러올 수 없습니다
+    </string>
+    <string name="toast_new_tab_successful">
+        새로운 탭에서 열렸습니다
+    </string>
+    <string name="toast_refresh_failed">
+        새로 고침 할 수 없습니다
+    </string>
+    <string name="toast_start_download">
+        다운로드를 시작합니다
+    </string>
+
+    <!-- Token -->
+    <string name="token_edit_hint">
+        Readability 토큰
+    </string>
+    <string name="token_add">
+        추가하기
+    </string>
+    <string name="token_desc">
+        Go to https://www.readability.com/developers/api to get your own Readability token
+    </string>
+</resources>
