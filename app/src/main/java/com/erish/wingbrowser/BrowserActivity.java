@@ -45,8 +45,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-import org.askerov.dynamicgrid.DynamicGridView;
-
 import java.util.List;
 
 import io.github.mthli.Ninja.Browser.AlbumController;
@@ -194,20 +192,7 @@ public class BrowserActivity extends Activity implements BrowserController {
             updateProgress(BrowserUnit.PROGRESS_MIN);
         }
 
-        DynamicGridView gridView = (DynamicGridView) layout.findViewById(R.id.home_grid);
         TextView aboutBlank = (TextView) layout.findViewById(R.id.home_about_blank);
-        gridView.setEmptyView(aboutBlank);
-
-        /* Wait for gridAdapter.notifyDataSetChanged() */
-        if (update) {
-            gridView.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    layout.setAlbumCover(ViewUnit.capture(layout, dimen144dp, dimen108dp, false, Bitmap.Config.RGB_565));
-                    updateProgress(BrowserUnit.PROGRESS_MAX);
-                }
-            }, shortAnimTime);
-        }
     }
 
     private void initSearchPanel() {
@@ -900,18 +885,6 @@ public class BrowserActivity extends Activity implements BrowserController {
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        if (currentAlbumController != null && currentAlbumController instanceof NinjaRelativeLayout) {
-            NinjaRelativeLayout layout = (NinjaRelativeLayout) currentAlbumController;
-            if (layout.getFlag() == BrowserUnit.FLAG_HOME) {
-                DynamicGridView gridView = (DynamicGridView) layout.findViewById(R.id.home_grid);
-                if (gridView.isEditMode()) {
-                    gridView.stopEditMode();
-                    relayoutOK.setVisibility(View.GONE);
-                    omnibox.setVisibility(View.VISIBLE);
-                }
-            }
-        }
-
         hideSearchPanel();
         if (switcherPanel.getStatus() != SwitcherPanel.Status.EXPANDED) {
             switcherPanel.expanded();
@@ -1003,18 +976,6 @@ public class BrowserActivity extends Activity implements BrowserController {
         IntentUnit.setClear(false);
 
         create = false;
-        if (currentAlbumController != null && currentAlbumController instanceof NinjaRelativeLayout) {
-            NinjaRelativeLayout layout = (NinjaRelativeLayout) currentAlbumController;
-            if (layout.getFlag() == BrowserUnit.FLAG_HOME) {
-                DynamicGridView gridView = (DynamicGridView) layout.findViewById(R.id.home_grid);
-                if (gridView.isEditMode()) {
-                    gridView.stopEditMode();
-                    relayoutOK.setVisibility(View.GONE);
-                    omnibox.setVisibility(View.VISIBLE);
-                    initHomeGrid(layout, true);
-                }
-            }
-        }
 
         IntentUnit.setContext(this);
         super.onPause();
