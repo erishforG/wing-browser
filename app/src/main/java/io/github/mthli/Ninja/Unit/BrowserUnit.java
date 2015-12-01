@@ -152,17 +152,6 @@ public class BrowserUnit {
             return null;
         }
 
-//        String green500 = "<font color='#4CAF50'>{content}</font>";
-//        String gray500 = "<font color='#9E9E9E'>{content}</font>";
-//
-//        if (url.startsWith(BrowserUnit.URL_SCHEME_HTTPS)) {
-//            String scheme = green500.replace("{content}", BrowserUnit.URL_SCHEME_HTTPS);
-//            url = scheme + url.substring(8);
-//        } else if (url.startsWith(BrowserUnit.URL_SCHEME_HTTP)) {
-//            String scheme = gray500.replace("{content}", BrowserUnit.URL_SCHEME_HTTP);
-//            url = scheme + url.substring(7);
-//        }
-
         return url;
     }
 

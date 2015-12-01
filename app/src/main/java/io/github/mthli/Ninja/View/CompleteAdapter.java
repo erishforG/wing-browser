@@ -156,7 +156,7 @@ public class CompleteAdapter extends BaseAdapter implements Filterable {
 
         CompleteItem item = resultList.get(position);
         holder.titleView.setText(item.getTitle());
-//        TODO : 텍스트 제목 수정
+
         if (item.getURL() != null) {
             holder.urlView.setText(Html.fromHtml(BrowserUnit.urlWrapper(item.getURL())), TextView.BufferType.SPANNABLE);
         } else {
