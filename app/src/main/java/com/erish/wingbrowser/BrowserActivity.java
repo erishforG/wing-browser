@@ -33,11 +33,9 @@ import android.webkit.CookieManager;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -80,11 +78,6 @@ public class BrowserActivity extends Activity implements BrowserController {
 
     private RelativeLayout searchPanel;
     private EditText searchBox;
-    private ImageButton searchUp;
-    private ImageButton searchDown;
-    private ImageButton searchCancel;
-
-    private Button relayoutOK;
     private FrameLayout contentFrame;
 
     private class VideoCompletionListener implements MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener {
@@ -154,7 +147,6 @@ public class BrowserActivity extends Activity implements BrowserController {
         initSwitcherView();
         initOmnibox();
         initSearchPanel();
-        relayoutOK = (Button) findViewById(R.id.main_relayout_ok);
         contentFrame = (FrameLayout) findViewById(R.id.main_content);
 
 //        TODO : WEB URL
@@ -198,9 +190,6 @@ public class BrowserActivity extends Activity implements BrowserController {
     private void initSearchPanel() {
         searchPanel = (RelativeLayout) findViewById(R.id.main_search_panel);
         searchBox = (EditText) findViewById(R.id.main_search_box);
-        searchUp = (ImageButton) findViewById(R.id.main_search_up);
-        searchDown = (ImageButton) findViewById(R.id.main_search_down);
-        searchCancel = (ImageButton) findViewById(R.id.main_search_cancel);
 
         searchBox.addTextChangedListener(new TextWatcher() {
             @Override
@@ -231,45 +220,6 @@ public class BrowserActivity extends Activity implements BrowserController {
                     return true;
                 }
                 return false;
-            }
-        });
-
-        searchUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String query = searchBox.getText().toString();
-                if (query.isEmpty()) {
-                    NinjaToast.show(BrowserActivity.this, R.string.toast_input_empty);
-                    return;
-                }
-
-                hideSoftInput(searchBox);
-                if (currentAlbumController instanceof NinjaWebView) {
-                    ((NinjaWebView) currentAlbumController).findNext(false);
-                }
-            }
-        });
-
-        searchDown.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String query = searchBox.getText().toString();
-                if (query.isEmpty()) {
-                    NinjaToast.show(BrowserActivity.this, R.string.toast_input_empty);
-                    return;
-                }
-
-                hideSoftInput(searchBox);
-                if (currentAlbumController instanceof NinjaWebView) {
-                    ((NinjaWebView) currentAlbumController).findNext(true);
-                }
-            }
-        });
-
-        searchCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideSearchPanel();
             }
         });
     }

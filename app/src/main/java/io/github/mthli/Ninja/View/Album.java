@@ -73,10 +73,6 @@ public class Album {
         albumTitle.setText(context.getString(R.string.album_untitled));
     }
 
-    public void activate() {
-        albumView.setBackgroundResource(R.drawable.album_shape_blue);
-    }
-
     public void deactivate() {
         albumView.setBackgroundResource(R.drawable.album_shape_dark);
     }
