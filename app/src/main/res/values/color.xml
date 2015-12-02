@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_user_background">#e55756</color>
+    <color name="color_background">#AEE9E9</color>
 
     <!-- NINJA BROSWER -->
     <color name="blue_900">#0D47A1</color>
