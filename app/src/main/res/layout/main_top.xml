@@ -31,13 +31,13 @@
                   android:orientation="vertical"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
-                  android:background="@color/color_user_background">
+                  android:background="@color/color_background">
 
         <RelativeLayout android:id="@+id/main_omnibox"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/layout_height_52dp"
                         android:minHeight="@dimen/layout_height_48dp"
-                        android:background="@color/color_user_background">
+                        android:background="@color/color_background">
 
             <ImageView android:id="@+id/main_omnibox_overflow"
                          android:layout_width="50dp"
@@ -59,7 +59,7 @@
                             android:layout_alignParentLeft="true"
                             android:layout_toLeftOf="@id/main_omnibox_overflow"
                             android:layout_marginLeft="@dimen/layout_margin_8dp"
-                            android:background="@color/color_user_background">
+                            android:background="@color/color_background">
 
                 <TextView android:id="@+id/main_omnibox_input"
                           android:layout_width="match_parent"
@@ -70,7 +70,7 @@
                           android:textColorHint="@android:color/white"
                           android:textSize="@dimen/text_size_16sp"
                           android:singleLine="true"
-                          android:background="@color/color_user_background">
+                          android:background="@color/color_background">
                 </TextView>
             </RelativeLayout>
 
