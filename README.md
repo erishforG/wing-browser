@@ -1,7 +1,7 @@
-  wing browser
-
-simple browser with single activity customized for S.Korea circumstances
+wing browser
 ===
+simple browser with single activity customized for S.Korea circumstances
+
 
 ## 윙브라우저는 어떤 브라우저?:
     
