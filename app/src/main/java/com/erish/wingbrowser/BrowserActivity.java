@@ -156,9 +156,9 @@ public class BrowserActivity extends Activity implements BrowserController {
 
             if(!url.equals(""))
                 pinAlbums(url);
+        } else {
+            pinAlbums("http://google.com");
         }
-
-        pinAlbums("http://daum.net");
     }
 
     private void initSwitcherView() {
