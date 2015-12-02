@@ -960,7 +960,7 @@ public class BrowserActivity extends Activity implements BrowserController {
         int id = item.getItemId();
 
         if (id == R.id.action_open) {
-            Uri uri = Uri.parse(inputBox.getText().toString());
+            Uri uri = Uri.parse(((NinjaWebView) currentAlbumController).getUrl());
             Intent it = new Intent(Intent.ACTION_VIEW,uri);
             startActivity(it);
         } else if (id == R.id.action_refresh) {
