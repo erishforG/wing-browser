@@ -18,8 +18,8 @@ import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -150,14 +150,16 @@ public class BrowserActivity extends Activity implements BrowserController {
         contentFrame = (FrameLayout) findViewById(R.id.main_content);
 
 //        TODO : WEB URL
-        if(getIntent() != null && getIntent().getData() != null) {
+        if(getIntent() != null) {
             Intent intent = getIntent();
-            String url = intent.getData().toString();
+            String url = "http://google.com";
 
-            if(!url.equals(""))
+            if (getIntent().getData() != null) {
+                url = intent.getData().toString();
+            }
+
+            if (!url.equals(""))
                 pinAlbums(url);
-        } else {
-            pinAlbums("http://google.com");
         }
     }
 
@@ -171,10 +173,12 @@ public class BrowserActivity extends Activity implements BrowserController {
         inputBox = (TextView) findViewById(R.id.main_omnibox_input);
         omniboxOverflow = (ImageView) findViewById(R.id.main_omnibox_overflow);
         progressBar = (ProgressBar) findViewById(R.id.main_progress_bar);
+
+        registerForContextMenu(omniboxOverflow);
         omniboxOverflow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openOptionsMenu();
+                openContextMenu(v);
             }
         });
     }
@@ -299,7 +303,12 @@ public class BrowserActivity extends Activity implements BrowserController {
             } else if (controller instanceof NinjaRelativeLayout) {
                 ((NinjaRelativeLayout) controller).setBrowserController(this);
             }
-            switcherContainer.addView(controller.getAlbumView(), LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
+
+            if(switcherContainer.getChildCount() > 1)
+                switcherContainer.removeAllViews();
+            else
+                switcherContainer.addView(controller.getAlbumView(), LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
+
             controller.getAlbumView().setVisibility(View.VISIBLE);
             controller.deactivate();
         }
@@ -828,7 +837,7 @@ public class BrowserActivity extends Activity implements BrowserController {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-            addAlbum(getString(R.string.album_untitled), url, true, null);
+                addAlbum(getString(R.string.album_untitled), url, true, null);
             }
         }, shortAnimTime);
     }
@@ -949,17 +958,21 @@ public class BrowserActivity extends Activity implements BrowserController {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_browser, menu);
-        return true;
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        if(v.getId() == R.id.main_omnibox_overflow)
+            getMenuInflater().inflate(R.menu.menu_browser, menu);
+
+        super.onCreateContextMenu(menu, v, menuInfo);
     }
-     
+
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onContextItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.action_open) {
+            if(((NinjaWebView) currentAlbumController) == null || ((NinjaWebView) currentAlbumController).getUrl().isEmpty())
+                return false;
+
             Uri uri = Uri.parse(((NinjaWebView) currentAlbumController).getUrl());
             Intent it = new Intent(Intent.ACTION_VIEW,uri);
             startActivity(it);
