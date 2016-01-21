@@ -303,7 +303,12 @@ public class BrowserActivity extends Activity implements BrowserController {
             } else if (controller instanceof NinjaRelativeLayout) {
                 ((NinjaRelativeLayout) controller).setBrowserController(this);
             }
-            switcherContainer.addView(controller.getAlbumView(), LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
+
+            if(switcherContainer.getChildCount() > 1)
+                switcherContainer.removeAllViews();
+            else
+                switcherContainer.addView(controller.getAlbumView(), LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
+
             controller.getAlbumView().setVisibility(View.VISIBLE);
             controller.deactivate();
         }
@@ -965,6 +970,9 @@ public class BrowserActivity extends Activity implements BrowserController {
         int id = item.getItemId();
 
         if (id == R.id.action_open) {
+            if(((NinjaWebView) currentAlbumController) == null || ((NinjaWebView) currentAlbumController).getUrl().isEmpty())
+                return false;
+
             Uri uri = Uri.parse(((NinjaWebView) currentAlbumController).getUrl());
             Intent it = new Intent(Intent.ACTION_VIEW,uri);
             startActivity(it);
